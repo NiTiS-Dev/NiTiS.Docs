@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="../Meta.props"/>
-
+	
 	<ItemGroup>
-		<ProjectReference Include="..\NiTiS.Docs\NiTiS.Docs.csproj" />
+		<PackageReference Include="NiTiS.IO" Version="2.0.3" />
 	</ItemGroup>
 
 </Project>
