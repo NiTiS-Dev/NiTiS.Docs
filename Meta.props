@@ -22,6 +22,7 @@
 		<DebugType>embedded</DebugType>
 
 		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Docs</RepositoryUrl>
+		<Authors>NiTiS-Dev</Authors>
 		<PackageIconUrl>https://raw.githubusercontent.com/NiTiS-Dev/meta/singleton/ntscr/core/original.png</PackageIconUrl>
 	</PropertyGroup>
 </Project>
