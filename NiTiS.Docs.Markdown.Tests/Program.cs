@@ -2,16 +2,16 @@
 
 namespace NiTiS.Docs.Markdown.Tests;
 
-public class Program
+internal static class Program
 {
 	private static void Main(string[] args)
 	{
 		MarkdownDocs docs = new(new Directory("./docs/"));
+		docs.TypeDocumentator<StringDocumentator>();
+		docs.TypeDocumentator<ItemDocumentator>();
 
-
-
-		docs.Documentate();
-
-		docs.Build();
+		docs.Document("abobus", "deoxy");
+		docs.Document(Items.A, Items.B, Items.C);
+		docs.Deploy();
 	}
 }
