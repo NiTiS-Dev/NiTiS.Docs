@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace NiTiS.Docs.Markdown;
 
 public sealed class MarkdownBuilder
 {
-	private const string MdNewLn = "  \n";
+	private const string Newline = "  \n";
 	private StringBuilder sb = new();
 	public MarkdownBuilder WriteRaw(string rawContent)
 	{
-		sb.Append(rawContent + MdNewLn);
+		sb.Append(rawContent + Newline);
 		return this;
 	}
 	public MarkdownBuilder PlaceHeader(ushort power = 1)
@@ -23,12 +22,12 @@ public sealed class MarkdownBuilder
 	}
 	public MarkdownBuilder NewLine()
 	{
-		sb.Append(MdNewLn);
+		sb.Append(Newline);
 		return this;
 	}
 	public MarkdownBuilder PlainText(string text)
 	{
-		sb.Append(text.Replace("\n", "  \n"));
+		sb.Append(text);
 		return this;
 	}
 	public MarkdownBuilder Link(string text, MarkdownDocumentation href)

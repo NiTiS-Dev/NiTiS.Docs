@@ -1,4 +1,5 @@
 ﻿using NiTiS.IO;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NiTiS.Docs.Markdown;
@@ -16,19 +17,22 @@ public class MarkdownDocs : Docs<MarkdownDocumentation>
 			if (obj is null)
 				continue;
 
-			ITypeDocumentator<MarkdownDocumentation>? doc = documentators.Where(t => t.IsValidType(obj.GetType())).FirstOrDefault();
+			ITypeDocumentator<MarkdownDocumentation>? doc = TypeDocumentators.Values.Where(t => t.IsValidType(obj.GetType())).FirstOrDefault();
 
 			if (doc is null)
 				continue;
 
-			documentations.Add(doc.Documentate(obj));
+			doc.Documentate(this, obj);
 		}
 	}
 	public override void Deploy()
 	{
 		foreach (MarkdownDocumentation doc in documentations)
 		{
-			using System.IO.FileStream fs = new File(doc.Path).CreateOpen();
+			File file = new File(doc.Path);
+			file.Parent?.Create();
+			file.Create();
+			using System.IO.FileStream fs = file.CreateOpen();
 			using System.IO.StreamWriter sw = new(fs);
 
 

@@ -6,8 +6,9 @@ public interface ITypeDocumentator
 {
 	bool IsValidType(Type type);
 }
-public interface ITypeDocumentator<out T> : ITypeDocumentator
+public interface ITypeDocumentator<T> : ITypeDocumentator
 	where T : IDocumentationType
 {
-	T Documentate(object obj);
+	string GetPath(object obj);
+	T Documentate(Docs<T> docs, object obj);
 }

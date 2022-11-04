@@ -3,7 +3,7 @@
 namespace NiTiS.Docs.Markdown.Tests;
 public class ItemDocumentator : ITypeDocumentator<MarkdownDocumentation>
 {
-	public MarkdownDocumentation Documentate(object obj)
+	public MarkdownDocumentation Documentate(Docs<MarkdownDocumentation> docs, object obj)
 	{
 		Item item = (obj as Item)!;
 
@@ -26,14 +26,15 @@ public class ItemDocumentator : ITypeDocumentator<MarkdownDocumentation>
 
 	DEP:
 		mb.PlainText(" → ");
-		mb.Link(parent.Name, "/" + parent.Name);
+		mb.Link(docs.TypeDocumentators[typeof(Item)].GetPath(parent));
 		parent = parent.Parent;
 		if (parent is not null)
 			goto DEP;
 
 	RET:
-		return mb.Build(item.Name + ".md");
+		return mb.Build(GetPath(obj));
 	}
+	public string GetPath(object obj) => "item/" + (obj as Item)!.Name + ".md";
 	public bool IsValidType(Type type)
 		=> type == typeof(Item);
 }
